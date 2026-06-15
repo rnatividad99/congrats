@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Congrats</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;background:#0a1a0a;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;font-family:sans-serif}
+h1{color:white;font-size:clamp(2rem,6vw,4rem);z-index:10;position:absolute;top:18%}
+.garden{position:absolute;bottom:0;width:100%;height:60%}
+.flower{position:absolute;bottom:10%;display:flex;flex-direction:column;align-items:center;animation:sway 3s ease-in-out infinite}
+.stem{width:4px;height:120px;background:linear-gradient(#1a8a1a,#0d5e0d);border-radius:2px}
+.head{position:relative;width:50px;height:50px}
+.petal{position:absolute;width:18px;height:12px;border-radius:50%;top:50%;left:50%;transform-origin:0 0}
+.petal:nth-child(1){transform:rotate(0deg) translate(8px,-6px)}
+.petal:nth-child(2){transform:rotate(60deg) translate(8px,-6px)}
+.petal:nth-child(3){transform:rotate(120deg) translate(8px,-6px)}
+.petal:nth-child(4){transform:rotate(180deg) translate(8px,-6px)}
+.petal:nth-child(5){transform:rotate(240deg) translate(8px,-6px)}
+.petal:nth-child(6){transform:rotate(300deg) translate(8px,-6px)}
+.center{position:absolute;width:14px;height:14px;background:#ffdb58;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%)}
+.glow{position:absolute;width:60px;height:60px;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);filter:blur(10px);opacity:0.4}
+.leaf{position:absolute;width:30px;height:12px;background:#0d5e0d;border-radius:50%;bottom:40%;left:50%;transform:rotate(20deg) translateX(5px)}
+.leaf2{transform:rotate(-20deg) translateX(-35px)}
+
+.f1{left:5%}.f2{left:15%}.f3{left:25%}.f4{left:35%}.f5{left:45%}.f6{left:55%}.f7{left:65%}.f8{left:75%}.f9{left:85%}.f10{left:92%}
+.f1 .stem{height:140px}.f2 .stem{height:100px}.f3 .stem{height:160px}.f4 .stem{height:110px}.f5 .stem{height:150px}
+.f6 .stem{height:130px}.f7 .stem{height:170px}.f8 .stem{height:105px}.f9 .stem{height:145px}.f10 .stem{height:120px}
+.f1{animation-delay:0s}.f2{animation-delay:0.3s}.f3{animation-delay:0.7s}.f4{animation-delay:1s}.f5{animation-delay:0.5s}
+.f6{animation-delay:1.2s}.f7{animation-delay:0.2s}.f8{animation-delay:0.8s}.f9{animation-delay:1.5s}.f10{animation-delay:0.4s}
+
+.pink .petal{background:#ff7eb3}.pink .glow{background:#ff7eb3}
+.blue .petal{background:#7ec8e3}.blue .glow{background:#7ec8e3}
+.green .petal{background:#a8e6a1}.green .glow{background:#a8e6a1}
+.yellow .petal{background:#ffdb58}.yellow .glow{background:#ffdb58}
+.purple .petal{background:#d4a5ff}.purple .glow{background:#d4a5ff}
+.orange .petal{background:#ffaa5c}.orange .glow{background:#ffaa5c}
+.red .petal{background:#ff6b6b}.red .glow{background:#ff6b6b}
+
+.firefly{position:absolute;width:8px;height:8px;background:#ffffaa;border-radius:50%;box-shadow:0 0 10px #ffff66,0 0 20px #ffff33;animation:float 6s ease-in-out infinite,blink 2s ease-in-out infinite}
+.ff1{top:10%;left:20%;animation-delay:0s}.ff2{top:25%;left:70%;animation-delay:1s}
+.ff3{top:15%;left:45%;animation-delay:2s}.ff4{top:30%;left:10%;animation-delay:0.5s}
+.ff5{top:8%;left:80%;animation-delay:1.5s}.ff6{top:35%;left:55%;animation-delay:2.5s}
+.ff7{top:20%;left:35%;animation-delay:3s}.ff8{top:12%;left:60%;animation-delay:0.8s}
+.ff9{top:28%;left:85%;animation-delay:1.8s}.ff10{top:5%;left:50%;animation-delay:2.2s}
+
+.grass{position:absolute;bottom:0;width:100%;height:80px;overflow:hidden}
+.blade{position:absolute;bottom:0;width:3px;background:linear-gradient(#1a8a1a,#0d4d0d);border-radius:2px 2px 0 0;transform-origin:bottom;animation:sway 2.5s ease-in-out infinite}
+
+@keyframes sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+@keyframes float{0%,100%{transform:translate(0,0)}25%{transform:translate(15px,-20px)}50%{transform:translate(-10px,-10px)}75%{transform:translate(20px,15px)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+</style>
+</head>
+<body>
+<h1>Congratulations!</h1>
+
+<div class="firefly ff1"></div><div class="firefly ff2"></div><div class="firefly ff3"></div>
+<div class="firefly ff4"></div><div class="firefly ff5"></div><div class="firefly ff6"></div>
+<div class="firefly ff7"></div><div class="firefly ff8"></div><div class="firefly ff9"></div>
+<div class="firefly ff10"></div>
+
+<div class="garden">
+  <div class="flower f1 pink"><div class="head"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="center"></div><div class="glow"></div></div><div class="stem"><div class="leaf"></div><div class="leaf leaf2"></div></div></div>
+  <div class="flower f2 blue"><div class="head"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="center"></div><div class="glow"></div></div><div class="stem"><div class="leaf"></div></div></div>
+  <div class="flower f3 yellow"><div class="head"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="center"></div><div class="glow"></div></div><div class="stem"><div class="leaf"></div><div class="leaf leaf2"></div></div></div>
+  <div class="flower f4 purple"><div class="head"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="center"></div><div class="glow"></div></div><div class="stem"><div class="leaf"></div></div></div>
+  <div class="flower f5 orange"><div class="head"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="center"></div><div class="glow"></div></div><div class="stem"><div class="leaf"></div><div class="leaf leaf2"></div></div></div>
+  <div class="flower f6 green"><div class="head"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="center"></div><div class="glow"></div></div><div class="stem"><div class="leaf"></div></div></div>
+  <div class="flower f7 red"><div class="head"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="center"></div><div class="glow"></div></div><div class="stem"><div class="leaf"></div><div class="leaf leaf2"></div></div></div>
+  <div class="flower f8 pink"><div class="head"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="center"></div><div class="glow"></div></div><div class="stem"><div class="leaf"></div></div></div>
+  <div class="flower f9 blue"><div class="head"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="center"></div><div class="glow"></div></div><div class="stem"><div class="leaf"></div><div class="leaf leaf2"></div></div></div>
+  <div class="flower f10 purple"><div class="head"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="center"></div><div class="glow"></div></div><div class="stem"><div class="leaf"></div></div></div>
+</div>
+
+<div class="grass">
+  <div class="blade" style="left:3%;height:60px;animation-delay:0.1s"></div>
+  <div class="blade" style="left:7%;height:70px;animation-delay:0.4s"></div>
+  <div class="blade" style="left:12%;height:50px;animation-delay:0.2s"></div>
+  <div class="blade" style="left:18%;height:65px;animation-delay:0.6s"></div>
+  <div class="blade" style="left:23%;height:75px;animation-delay:0.3s"></div>
+  <div class="blade" style="left:30%;height:55px;animation-delay:0.8s"></div>
+  <div class="blade" style="left:36%;height:70px;animation-delay:0.1s"></div>
+  <div class="blade" style="left:42%;height:60px;animation-delay:0.5s"></div>
+  <div class="blade" style="left:48%;height:72px;animation-delay:0.7s"></div>
+  <div class="blade" style="left:54%;height:58px;animation-delay:0.2s"></div>
+  <div class="blade" style="left:60%;height:68px;animation-delay:0.9s"></div>
+  <div class="blade" style="left:66%;height:75px;animation-delay:0.4s"></div>
+  <div class="blade" style="left:72%;height:55px;animation-delay:0.6s"></div>
+  <div class="blade" style="left:78%;height:65px;animation-delay:0.1s"></div>
+  <div class="blade" style="left:84%;height:70px;animation-delay:0.3s"></div>
+  <div class="blade" style="left:90%;height:60px;animation-delay:0.8s"></div>
+  <div class="blade" style="left:96%;height:68px;animation-delay:0.5s"></div>
+</div>
+</body>
+</html>
