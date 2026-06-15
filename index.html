@@ -3,11 +3,26 @@
 <head>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Congrats</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌻</text></svg>">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Congratulations!</h1>
 <canvas id="c"></canvas>
+
+<div class="envelope-wrapper" id="envelopeWrapper">
+  <div class="envelope" id="envelope">
+    <div class="envelope-back"></div>
+    <div class="envelope-cover"></div>
+    <div class="letter">
+      <p class="letter-text">Congratulations!</p>
+      <p class="letter-sub">We're so proud of you.</p>
+    </div>
+    <div class="envelope-front"></div>
+    <div class="envelope-flap"></div>
+  </div>
+  <p class="tap-hint" id="tapHint">Tap to open</p>
+</div>
+
 <script src="script.js"></script>
 </body>
 </html>

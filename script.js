@@ -328,12 +328,29 @@ for(let i=0;i<200;i++){
 }
 
 let startTime=null;
+let gardenStarted=false;
+
+const envelope=document.getElementById('envelope');
+const envelopeWrapper=document.getElementById('envelopeWrapper');
+const tapHint=document.getElementById('tapHint');
+
+envelope.addEventListener('click',()=>{
+  envelope.classList.add('opened');
+  tapHint.style.display='none';
+  gardenStarted=true;
+  startTime=null;
+  setTimeout(()=>{
+    envelopeWrapper.classList.add('opened');
+  },1600);
+});
+
 function animate(ts){
+  if(!gardenStarted){requestAnimationFrame(animate);drawBg();return;}
   if(!startTime)startTime=ts;
   const t=(ts-startTime)/1000;
   ctx.clearRect(0,0,W,H);
   const bg=ctx.createLinearGradient(0,0,0,H);
-  bg.addColorStop(0,'#030a03');bg.addColorStop(0.5,'#071407');bg.addColorStop(1,'#0a1a0a');
+  bg.addColorStop(0,'#0a0e2a');bg.addColorStop(0.5,'#0c1a2e');bg.addColorStop(1,'#0a2a2a');
   ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
 
   for(const g of grassBlades){
@@ -361,4 +378,12 @@ function animate(ts){
   for(const ff of fireflies){ff.update(t);ff.draw()}
   requestAnimationFrame(animate);
 }
+
+function drawBg(){
+  ctx.clearRect(0,0,W,H);
+  const bg=ctx.createLinearGradient(0,0,0,H);
+  bg.addColorStop(0,'#0a0e2a');bg.addColorStop(0.5,'#0c1a2e');bg.addColorStop(1,'#0a2a2a');
+  ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+}
+
 requestAnimationFrame(animate);
