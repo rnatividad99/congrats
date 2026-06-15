@@ -334,6 +334,13 @@ const envelope=document.getElementById('envelope');
 const envelopeWrapper=document.getElementById('envelopeWrapper');
 const tapHint=document.getElementById('tapHint');
 
+function revealLetterContent(){
+  const items=document.querySelectorAll('.fade-in');
+  items.forEach((el,i)=>{
+    setTimeout(()=>el.classList.add('visible'),i*200);
+  });
+}
+
 envelope.addEventListener('click',()=>{
   envelope.classList.add('opened');
   tapHint.style.display='none';
@@ -341,6 +348,7 @@ envelope.addEventListener('click',()=>{
   startTime=null;
   setTimeout(()=>{
     envelopeWrapper.classList.add('opened');
+    setTimeout(revealLetterContent,900);
   },1600);
 });
 
