@@ -22,7 +22,6 @@ canvas {
   height: 100%;
 }
 
-/* Envelope wrapper */
 .envelope-wrapper {
   position: fixed;
   top: 0;
@@ -48,7 +47,6 @@ canvas {
   perspective: 800px;
 }
 
-/* Envelope back */
 .envelope-back {
   position: absolute;
   top: 0;
@@ -72,7 +70,6 @@ canvas {
   opacity: 0.3;
 }
 
-/* Envelope front */
 .envelope-front {
   position: absolute;
   bottom: 0;
@@ -86,7 +83,6 @@ canvas {
   transition: opacity 0.4s ease;
 }
 
-/* Envelope flap */
 .envelope-flap {
   position: absolute;
   top: 0;
@@ -116,7 +112,6 @@ canvas {
   transform: rotateX(180deg);
 }
 
-/* Cover strip */
 .envelope-cover {
   position: absolute;
   top: 0;
@@ -132,7 +127,6 @@ canvas {
   opacity: 0;
 }
 
-/* Letter */
 .letter {
   position: absolute;
   top: 10%;
@@ -168,20 +162,18 @@ canvas {
   z-index: 6;
 }
 
-/* After envelope fades, letter expands to portrait */
 .envelope-wrapper.opened .letter {
   position: fixed;
   top: 50%;
   left: 50%;
   width: clamp(300px, 55vw, 420px);
-  height: clamp(420px, 70vh, 600px);
+  height: clamp(320px, 55vh, 500px);
   transform: translate(-50%, -50%);
   transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.2s;
   padding: 28px;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
-/* Fade envelope after opening */
 .envelope-wrapper.opened .envelope-flap {
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -200,7 +192,6 @@ canvas {
   opacity: 0;
 }
 
-/* Gold decorative border */
 .letter-border {
   position: absolute;
   top: 10px;
@@ -224,7 +215,6 @@ canvas {
   border-radius: 4px;
 }
 
-/* Gold ornamental corners */
 .corner {
   position: absolute;
   width: 20px;
@@ -261,7 +251,6 @@ canvas {
   border-radius: 0 0 4px 0;
 }
 
-/* Letter content */
 .letter-content {
   display: flex;
   flex-direction: column;
@@ -284,7 +273,6 @@ canvas {
   transform: translateY(0);
 }
 
-/* Letter text styles */
 .letter-greeting {
   font-size: clamp(1.1rem, 3vw, 1.4rem);
   color: #4a3728;
@@ -298,30 +286,8 @@ canvas {
   text-align: left;
 }
 
-.letter-closing {
-  font-size: clamp(0.9rem, 2.5vw, 1.05rem);
-  color: #4a3728;
-  margin-top: 10px;
-  font-style: italic;
-}
 
-/* Typing cursor */
-.cursor {
-  display: inline-block;
-  width: 2px;
-  height: 1em;
-  background: #4a3728;
-  margin-left: 2px;
-  animation: blink-cursor 0.7s step-end infinite;
-  vertical-align: text-bottom;
-}
 
-@keyframes blink-cursor {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-/* Tap hint */
 .tap-hint {
   color: rgba(255, 255, 255, 0.7);
   margin-top: 30px;
