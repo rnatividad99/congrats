@@ -3,9 +3,8 @@ let W,H;
 function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight}
 resize();window.onresize=resize;
 
-const flowers=[],particles=[],fireflies=[];
+const flowers=[],particles=[],fireflies=[],shootingStars=[],sparkles=[];
 
-// Flower types with their colors
 const flowerTypes=[
   {type:'rose',colors:['#ff4d6d','#ff7eb3','#c9184a','#ff8fa3','#e63971']},
   {type:'tulip',colors:['#ff6b6b','#ff91a4','#ffaa5c','#ff8c42','#d4a5ff','#ffffff','#ffdb58']},
@@ -265,7 +264,7 @@ class Firefly{
   constructor(){this.reset()}
   reset(){
     this.x=Math.random()*W;this.y=Math.random()*H*0.6;
-    this.size=2+Math.random()*3;this.phase=Math.random()*Math.PI*2;
+    this.size=1.5+Math.random()*2;this.phase=Math.random()*Math.PI*2;
     this.speedX=(Math.random()-0.5)*0.5;this.speedY=(Math.random()-0.5)*0.3;
   }
   update(t){
@@ -322,9 +321,81 @@ for(const row of rows){
 
 for(let i=0;i<20;i++)fireflies.push(new Firefly());
 
+class ShootingStar{
+  constructor(){this.active=false;}
+  reset(){
+    this.x=Math.random()*W*0.8;
+    this.y=Math.random()*H*0.3;
+    this.len=100+Math.random()*120;
+    this.speed=6+Math.random()*5;
+    this.angle=Math.PI/6+Math.random()*0.3;
+    this.life=1;
+    this.decay=0.01+Math.random()*0.008;
+    this.active=true;
+  }
+  update(){
+    if(!this.active)return;
+    this.x+=Math.cos(this.angle)*this.speed;
+    this.y+=Math.sin(this.angle)*this.speed;
+    this.life-=this.decay;
+    if(this.life<=0)this.active=false;
+  }
+  draw(){
+    if(!this.active)return;
+    const tailX=this.x-Math.cos(this.angle)*this.len*this.life;
+    const tailY=this.y-Math.sin(this.angle)*this.len*this.life;
+    const grad=ctx.createLinearGradient(tailX,tailY,this.x,this.y);
+    grad.addColorStop(0,'transparent');
+    grad.addColorStop(1,`rgba(255,255,220,${this.life})`);
+    ctx.beginPath();ctx.moveTo(tailX,tailY);ctx.lineTo(this.x,this.y);
+    ctx.strokeStyle=grad;ctx.lineWidth=3;ctx.stroke();
+    ctx.beginPath();ctx.arc(this.x,this.y,3,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,255,255,${this.life})`;ctx.fill();
+  }
+}
+for(let i=0;i<3;i++)shootingStars.push(new ShootingStar());
+
+class Sparkle{
+  constructor(x,y){
+    this.x=x;this.y=y;
+    this.vx=(Math.random()-0.5)*4;
+    this.vy=(Math.random()-0.5)*4;
+    this.size=2+Math.random()*3;
+    this.life=1;
+    this.decay=0.02+Math.random()*0.02;
+    this.color=['#ffd700','#fff4a3','#ffdb58','#ffffff'][Math.floor(Math.random()*4)];
+  }
+  update(){this.x+=this.vx;this.y+=this.vy;this.vy+=0.1;this.vx*=0.98;this.life-=this.decay;}
+  draw(){
+    if(this.life<=0)return;
+    ctx.save();ctx.globalAlpha=this.life;
+    const s=this.size*this.life;
+    ctx.beginPath();
+    ctx.moveTo(this.x,this.y-s);
+    ctx.lineTo(this.x+s*0.3,this.y-s*0.3);
+    ctx.lineTo(this.x+s,this.y);
+    ctx.lineTo(this.x+s*0.3,this.y+s*0.3);
+    ctx.lineTo(this.x,this.y+s);
+    ctx.lineTo(this.x-s*0.3,this.y+s*0.3);
+    ctx.lineTo(this.x-s,this.y);
+    ctx.lineTo(this.x-s*0.3,this.y-s*0.3);
+    ctx.closePath();
+    ctx.fillStyle=this.color;ctx.fill();
+    ctx.restore();ctx.globalAlpha=1;
+  }
+}
+
+canvas.addEventListener('click',(e)=>{
+  for(let i=0;i<12;i++)sparkles.push(new Sparkle(e.clientX,e.clientY));
+});
+canvas.addEventListener('touchstart',(e)=>{
+  const t=e.touches[0];
+  for(let i=0;i<12;i++)sparkles.push(new Sparkle(t.clientX,t.clientY));
+});
+
 const grassBlades=[];
 for(let i=0;i<200;i++){
-  grassBlades.push({x:W*Math.random(),h:40+Math.random()*80,phase:Math.random()*Math.PI*2,width:1.5+Math.random()*2.5});
+  grassBlades.push({x:W*Math.random(),h:40+Math.random()*80,phase:Math.random()*Math.PI*2,width:1.5+Math.random()*2.5,bend:(Math.random()-0.5)*15});
 }
 
 let startTime=null;
@@ -346,6 +417,17 @@ envelope.addEventListener('click',()=>{
   tapHint.style.display='none';
   gardenStarted=true;
   startTime=null;
+  const audio=new Audio('audio.mp3');
+  audio.loop=true;
+  audio.volume=0.4;
+  audio.play();
+  const muteBtn=document.getElementById('muteBtn');
+  muteBtn.style.display='block';
+  muteBtn.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    audio.muted=!audio.muted;
+    muteBtn.textContent=audio.muted?'\ud83d\udd07':'\ud83d\udd0a';
+  });
   setTimeout(()=>{
     envelopeWrapper.classList.add('opened');
     setTimeout(revealLetterContent,900);
@@ -363,9 +445,9 @@ function animate(ts){
 
   for(const g of grassBlades){
     if(g.h<60)continue;
-    const sway=Math.sin(t*1.2+g.phase)*4;
+    const sway=Math.sin(t*0.3+g.phase)*2;
     ctx.beginPath();ctx.moveTo(g.x,H);
-    ctx.quadraticCurveTo(g.x+sway,H-g.h*0.6,g.x+sway*1.5,H-g.h);
+    ctx.quadraticCurveTo(g.x+g.bend+sway,H-g.h*0.6,g.x+g.bend*1.2+sway*1.5,H-g.h);
     ctx.strokeStyle=`hsl(${118+Math.random()*8},55%,${14+Math.random()*8}%)`;
     ctx.lineWidth=g.width;ctx.stroke();
   }
@@ -373,9 +455,9 @@ function animate(ts){
 
   for(const g of grassBlades){
     if(g.h>=60)continue;
-    const sway=Math.sin(t*1.2+g.phase)*3;
+    const sway=Math.sin(t*0.3+g.phase)*1.5;
     ctx.beginPath();ctx.moveTo(g.x,H);
-    ctx.quadraticCurveTo(g.x+sway,H-g.h*0.6,g.x+sway*1.2,H-g.h);
+    ctx.quadraticCurveTo(g.x+g.bend*0.7+sway,H-g.h*0.6,g.x+g.bend*0.8+sway*1.2,H-g.h);
     ctx.strokeStyle=`hsl(${120+Math.random()*6},60%,${16+Math.random()*10}%)`;
     ctx.lineWidth=g.width;ctx.stroke();
   }
@@ -384,6 +466,14 @@ function animate(ts){
     if(particles[i].life<=0)particles.splice(i,1);
   }
   for(const ff of fireflies){ff.update(t);ff.draw()}
+  for(const ss of shootingStars){
+    if(!ss.active&&Math.random()<0.003){ss.reset();}
+    ss.update();ss.draw();
+  }
+  for(let i=sparkles.length-1;i>=0;i--){
+    sparkles[i].update();sparkles[i].draw();
+    if(sparkles[i].life<=0)sparkles.splice(i,1);
+  }
   requestAnimationFrame(animate);
 }
 

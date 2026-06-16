@@ -332,3 +332,19 @@ canvas {
   0%, 100% { opacity: 0.7; }
   50% { opacity: 0.3; }
 }
+
+.mute-btn {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  z-index: 200;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: none;
+  backdrop-filter: blur(4px);
+}
