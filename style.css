@@ -138,7 +138,7 @@ canvas {
   border-radius: 8px;
   z-index: 2;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  padding: 28px;
+  padding: 20px;
   overflow: hidden;
   transition:
     transform 1s cubic-bezier(0.25, 1, 0.5, 1) 0.5s,
@@ -172,7 +172,7 @@ canvas {
   max-height: 85dvh;
   transform: translate(-50%, -50%);
   transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.2s;
-  padding: 28px;
+  padding: 20px;
   overflow: hidden;
 }
 
@@ -257,8 +257,8 @@ canvas {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 14px;
-  padding: 10px;
+  gap: 1.5vmin;
+  padding: 1.5vmin;
   width: 100%;
   position: relative;
   z-index: 5;
@@ -276,15 +276,15 @@ canvas {
 }
 
 .letter-greeting {
-  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  font-size: clamp(1rem, 4vmin, 1.4rem);
   color: #4a3728;
   font-weight: bold;
 }
 
 .letter-body {
-  font-size: clamp(0.85rem, 2.2vw, 1rem);
+  font-size: clamp(0.7rem, 2vmin, 1rem);
   color: #5a4a3a;
-  line-height: 1.7;
+  line-height: 1.6;
   text-align: left;
 }
 
